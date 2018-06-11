@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @SpringBootApplication
-@Import({ControllerConfig.class})
+@Import({ControllerConfig.class, CacheConfig.class, ServiceConfig.class})
 public class APIApplication {
 
 	public static void main(String[]args) {

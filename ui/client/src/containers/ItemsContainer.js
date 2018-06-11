@@ -3,11 +3,9 @@ import ItemsList from '../components/ItemsList';
 import ItemsAdd from "../components/ItemsAdd";
 
 import { connect } from 'react-redux';
-import {getHasError, getIsLoading, getItems, itemsFetchData} from '../items/index';
+import {getHasError, getIsLoading, getItems, ITEMS_URL, itemsFetchData} from '../items/index';
 
 const mapStateToProps = state => {
-    console.log('\n ******** mapStateToProps ******** \n');
-    console.log(state, Math.random());
     return {
         items: getItems(state),
         hasError: getHasError(state),
@@ -16,10 +14,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    console.log('\n ******** mapDispatchToProps ******** \n');
     return {
         fetchData: (url) => {
-            console.log('componentDidMount call this when component is created/updated');
             dispatch(itemsFetchData(url));
         }
     };
@@ -28,13 +24,13 @@ const mapDispatchToProps = (dispatch) => {
 class ItemsContainer extends Component {
 
     componentDidMount() {
-        console.log('\n componentDidMount')
-        this.props.fetchData('http://localhost:8080/items');
+        this.props.fetchData(ITEMS_URL);
     }
 
     render() {
         console.log('\n ******** ItemsContainer render ******** \n');
         console.log(this.props);
+        console.log(this.state);
         const {items, isLoading, hasError} = this.props;
 
         if (isLoading) {

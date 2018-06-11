@@ -12,11 +12,7 @@ let ItemsAdd = ({ dispatch }) => (
 
         <button onClick={()=> {
             if (!itemNameInput.value) return;
-
-            console.log(addItem(itemNameInput.value));
-
             dispatch(addItem(itemNameInput.value));
-
             itemNameInput.value = '';
         }}>Add item</button>
 
