@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import ItemsList from '../components/ItemsList';
-import ItemsAdd from "../components/ItemsAdd";
+import ItemForm from "../components/ItemForm";
 
 import { connect } from 'react-redux';
-import {getHasError, getIsLoading, getItems, ITEMS_URL, itemsFetchData} from '../items/index';
+import {addItem, getHasError, getIsLoading, getItems, ITEMS_URL, itemsFetchData} from '../items/index';
 
 const mapStateToProps = state => {
     return {
@@ -17,6 +17,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: (url) => {
             dispatch(itemsFetchData(url));
+        },
+        handleSubmit: (item) => {
+            if (!item.name) return;
+            dispatch(addItem(item.name));
+            item.name = '';
         }
     };
 };
@@ -31,7 +36,7 @@ class ItemsContainer extends Component {
         console.log('\n ******** ItemsContainer render ******** \n');
         console.log(this.props);
         console.log(this.state);
-        const {items, isLoading, hasError} = this.props;
+        const {items, isLoading, hasError, handleSubmit} = this.props;
 
         if (isLoading) {
             return <span>Loading...</span>;
@@ -40,9 +45,13 @@ class ItemsContainer extends Component {
             return <span>Error</span>;
         }
 
-        return <div>
-            <ItemsList items={items} />
-            <ItemsAdd />
+        return <div className="row">
+            <div className="col-3">
+                <ItemForm onSubmit={handleSubmit} />
+            </div>
+            <div className="col">
+                <ItemsList items={items} />
+            </div>
         </div>;
     }
 }

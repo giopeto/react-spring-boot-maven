@@ -1,35 +1,30 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
+import InputField from './InputField';
 
-//let itemNameInput = '';
-/*
-let ItemsAdd = ({ handleClick }) => (
-    <div>
+const validate = values => {
+    const errors = {};
 
-        <label htmlFor="message">Name</label>
-        <input type="text" name="name" ref={node=> {itemNameInput = node;}} />
+    if (!values.name) {
+        errors.name = 'Name is required';
+    }
 
-        <button onClick={() => handleClick(itemNameInput)}>Add item</button>
-
-
-    </div>
-);*/
-
+    return errors;
+};
 
 let ItemForm = props => {
-    const { handleSubmit } = props
-    return <form onSubmit={handleSubmit}>
-        <div>
-            <label htmlFor="firstName">Name</label>
-            <Field name="name" component="input" type="text" />
+    const { handleSubmit, onSubmit } = props
+    return <form onSubmit={ handleSubmit(onSubmit) }>
+        <div className="form-group">
+            <Field type="text" name="name" component={InputField} label="name" placeholder="Add name"/>
         </div>
-        <button type="submit">Add</button>
+        <button type="submit" className="btn btn-secondary">Add</button>
     </form>
 }
 
 ItemForm = reduxForm({
-    // a unique name for the form
-    form: 'item'
+    form: 'itemForm',
+    validate
 })(ItemForm)
 
 

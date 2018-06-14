@@ -3,11 +3,12 @@ import React from 'react';
 const ItemsList = (props) => (
     <div>
         <h1>Items</h1>
-        <ul>
+        <ul className="list-group">
             {props.items.map(item =>
-                <ul key={item.id}>{item.name}</ul>
+                <li className="list-group-item" key={item.id}>{item.name}</li>
             )}
         </ul>
+
     </div>
 );
 

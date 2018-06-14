@@ -35,8 +35,8 @@ public class ItemsController {
 	}
 
 	@RequestMapping(method = POST)
-	public List<Item> save(@RequestBody Item item) {
+	public Item save(@RequestBody Item item) {
 		itemsService.setItem(item);
-		return itemsService.getItems();
+		return item;
 	}
 }

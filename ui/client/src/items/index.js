@@ -9,9 +9,9 @@ export const ITEMS_FETCH_DATA_SUCCESS = 'ITEMS_FETCH_DATA_SUCCESS';
 
 
 // Selectors
-export const getItems = (state) => state.items;
-export const getHasError = (state) => state.hasError;
-export const getIsLoading = (state) => state.isLoading;
+export const getItems = (state) => state.items.items;
+export const getHasError = (state) => state.items.hasError;
+export const getIsLoading = (state) => state.items.isLoading;
 
 
 // Reducers
@@ -21,7 +21,7 @@ const initialState = {
     isLoading: true
 };
 
-export const rootReducer = (state = initialState, action) => {
+const itemReducers = (state = initialState, action) => {
     console.log('rootReducer type: ', action);
     switch (action.type) {
         case ITEMS_FETCH_DATA_SUCCESS:
@@ -32,6 +32,7 @@ export const rootReducer = (state = initialState, action) => {
         case ITEMS_HAS_ERROR:
             return Object.assign({}, state, {...action, isLoading: false});
         case ADD_ITEM:
+            console.log('ADD_ITEM: ', state);
             console.log('ADD_ITEM: ', { ...state, items: [...state.items, action.payload] });
             return {...state, items: [...state.items, action.payload]};
         default:
@@ -39,6 +40,7 @@ export const rootReducer = (state = initialState, action) => {
     }
 };
 
+export default itemReducers;
 
 // Actions
 export function itemsHasError (bool) {
