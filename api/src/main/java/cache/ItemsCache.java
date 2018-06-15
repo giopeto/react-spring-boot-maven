@@ -19,4 +19,9 @@ public class ItemsCache {
 		items.add(item);
 		return items;
 	}
+
+	public int getSize() {
+		return items.size();
+	}
+
 }

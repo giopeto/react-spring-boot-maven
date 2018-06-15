@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import InputField from './InputField';
+import FileFileInput from "./FileInputField";
 
 const validate = values => {
     const errors = {};
@@ -13,19 +14,25 @@ const validate = values => {
 };
 
 let ItemForm = props => {
-    const { handleSubmit, onSubmit } = props
-    return <form onSubmit={ handleSubmit(onSubmit) }>
+
+    const { handleSubmit, onSubmit } = props;
+
+    return <form onSubmit={ handleSubmit(onSubmit) } encType="multipart/form-data">
         <div className="form-group">
-            <Field type="text" name="name" component={InputField} label="name" placeholder="Add name"/>
+            <Field type="text" name="name" component={InputField} label="Item name" placeholder="Add name" id="item" />
+        </div>
+        <div className="form-group">
+            <Field type="file" name="itemImg" component={FileFileInput} />
+
         </div>
         <button type="submit" className="btn btn-secondary">Add</button>
     </form>
-}
+};
 
 ItemForm = reduxForm({
     form: 'itemForm',
     validate
-})(ItemForm)
+})(ItemForm);
 
 
 export default ItemForm;

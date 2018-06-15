@@ -1,11 +1,11 @@
 import React from 'react';
 
-const InputField = ({input, label, type, placeholder='', meta: { touched, error, warning }}) =>
+const InputField = ({input, label, type, placeholder='', id, meta: { touched, error, warning }}) =>
     <div>
         {/*Render input*/}
-        <label>{label}</label>
+        <label htmlFor={id}>{label}</label>
         <div className="input-group">
-            <input {...input} type={type} placeholder={placeholder} />
+            <input {...input} type={type} placeholder={placeholder} id={id} />
         </div>
         {/*Render error*/}
         {touched && error &&

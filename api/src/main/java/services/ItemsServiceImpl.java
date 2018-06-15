@@ -24,6 +24,8 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Override
 	public Item setItem(Item item) {
+		int nextId = itemsCache.getSize();
+		item.setId(nextId++);
 		itemsCache.setItems(item);
 		return item;
 	}

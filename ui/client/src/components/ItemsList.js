@@ -8,7 +8,6 @@ const ItemsList = (props) => (
                 <li className="list-group-item" key={item.id}>{item.name}</li>
             )}
         </ul>
-
     </div>
 );
 
